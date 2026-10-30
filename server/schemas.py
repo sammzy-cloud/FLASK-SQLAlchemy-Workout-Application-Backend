@@ -31,6 +31,7 @@ class WorkoutSchema(Schema):
 
     duration_minutes = fields.Int(
         required=True,
+        strict=True,
         validate=validate.Range(min=1, error="Duration must be a positive integer.")
     )
 
@@ -40,21 +41,24 @@ class WorkoutSchema(Schema):
 class WorkoutExerciseSchema(Schema):
     id = fields.Int(dump_only=True)
 
-    workout_id = fields.Int(required=True)
-    exercise_id = fields.Int(required=True)
+    workout_id = fields.Int(required=True, strict=True)
+    exercise_id = fields.Int(required=True, strict=True)
 
     reps = fields.Int(
         allow_none=True,
+        strict=True,
         validate=validate.Range(min=1, error="Reps must be a positive integer.")
     )
 
     sets = fields.Int(
         allow_none=True,
+        strict=True,
         validate=validate.Range(min=1, error="Sets must be a positive integer.")
     )
 
     duration_seconds = fields.Int(
         allow_none=True,
+        strict=True,
         validate=validate.Range(
             min=1,
             error="Duration in seconds must be a positive integer."
